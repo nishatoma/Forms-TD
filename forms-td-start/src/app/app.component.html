@@ -1,21 +1,39 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form>
+      <!-- This is how you get access to the form created by angular automatically
+      using the #f="ngForm", the f can be anything -->
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
         <div id="user-data">
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" id="username" class="form-control">
+            <!-- ngModel lets angular know that this input is a control of our form. -->
+            <input
+             type="text" 
+             id="username" 
+             class="form-control"
+             ngModel
+             name="username">
           </div>
           <button class="btn btn-default" type="button">Suggest an Username</button>
           <div class="form-group">
             <label for="email">Mail</label>
-            <input type="email" id="email" class="form-control">
+            <input
+             type="email" 
+             id="email" 
+             class="form-control"
+             ngModel
+             name="email">
           </div>
         </div>
         <div class="form-group">
           <label for="secret">Secret Questions</label>
-          <select id="secret" class="form-control">
+          <!-- Select is just another type of HTML input -->
+          <select
+           id="secret" 
+           class="form-control"
+           ngModel
+           name="secret">
             <option value="pet">Your first Pet?</option>
             <option value="teacher">Your first teacher?</option>
           </select>
