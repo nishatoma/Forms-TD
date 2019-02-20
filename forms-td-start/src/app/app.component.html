@@ -4,7 +4,7 @@
       <!-- This is how you get access to the form created by angular automatically
       using the #f="ngForm", the f can be anything -->
       <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-        <div id="user-data">
+        <div id="user-data" ngModelGroup="userData">
           <div class="form-group">
             <label for="username">Username</label>
             <!-- ngModel lets angular know that this input is a control of our form. -->
@@ -13,7 +13,12 @@
              id="username" 
              class="form-control"
              ngModel
-             name="username">
+             name="username"
+             required
+             #user="ngModel">
+             <span class="help-block" *ngIf="!user.valid && user.touched">
+               Please enter a valid username
+             </span>
           </div>
           <button class="btn btn-default" type="button">Suggest an Username</button>
           <div class="form-group">
@@ -23,7 +28,13 @@
              id="email" 
              class="form-control"
              ngModel
-             name="email">
+             name="email"
+             required
+             email
+             #email="ngModel">
+             <span class="help-block" *ngIf="!email.valid && email.touched">
+               Please enter a valid email
+             </span>
           </div>
         </div>
         <div class="form-group">
@@ -32,13 +43,22 @@
           <select
            id="secret" 
            class="form-control"
-           ngModel
+           [ngModel]="defaultQuestion"
            name="secret">
             <option value="pet">Your first Pet?</option>
             <option value="teacher">Your first teacher?</option>
           </select>
         </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <div class="form-group">
+          <textarea class="form-control" name="questionAnswer" rows="3" [(ngModel)]="answer">
+
+          </textarea>
+        </div>
+        <p>Youre reply: {{ answer }}</p>
+        <button 
+          class="btn btn-primary" 
+          type="submit"
+          [disabled]="!form.valid">Submit</button>
       </form>
     </div>
   </div>

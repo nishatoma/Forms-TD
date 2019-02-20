@@ -12,6 +12,8 @@ export class AppComponent {
   }
 
   @ViewChild('f') form: NgForm;
+  defaultQuestion = 'pet';
+  answer: string = '';
 
   // onSubmit(form: NgForm) {
   //   console.log(form);
