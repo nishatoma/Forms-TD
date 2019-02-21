@@ -1,9 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <!-- This is how you get access to the form created by angular automatically
-      using the #f="ngForm", the f can be anything -->
-      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
         <div id="user-data" ngModelGroup="userData">
           <div class="form-group">
             <label for="username">Username</label>
@@ -20,7 +19,7 @@
                Please enter a valid username
              </span>
           </div>
-          <button class="btn btn-default" type="button">Suggest an Username</button>
+          <button class="btn btn-default" type="button" (click)="suggestUserName()">Suggest an Username</button>
           <div class="form-group">
             <label for="email">Mail</label>
             <input
@@ -55,11 +54,27 @@
           </textarea>
         </div>
         <p>Youre reply: {{ answer }}</p>
+        <div class="radio" *ngFor="let gender of genders">
+          <label>
+            <input type="radio" name="gender" ngModel [value]="gender">
+            {{ gender }}
+          </label>
+        </div>
         <button 
           class="btn btn-primary" 
           type="submit"
           [disabled]="!form.valid">Submit</button>
       </form>
+    </div>
+  </div>
+  <hr>
+  <div class="row" *ngIf="submitted">
+    <div class="col-xs-12">
+      <h1>Username: {{ user1.username }}</h1>
+      <h1>Email: {{ user1.email }}</h1>
+      <h1>Secret: {{ user1.secret }}</h1>
+      <h1>Answer: {{ user1.answer }}</h1>
+      <h1>Gender: {{ user1.gender }}</h1>
     </div>
   </div>
 </div>
